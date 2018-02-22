@@ -205,7 +205,7 @@ function toQueryString(params) {
 }
 
 function etherscanXHR(useGetMethod, proto, network, module, action, params, end) {
-  var uri = proto + '://' + network + '.etherscan.io/api?' + toQueryString({ module: module, action: action }) + '&' + toQueryString(params)
+  var uri = proto + '://api-' + network + '.etherscan.io/api?' + toQueryString({ module: module, action: action }) + '&' + toQueryString(params)
 
   xhr({
     uri: uri,
