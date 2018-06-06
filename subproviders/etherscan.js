@@ -64,6 +64,7 @@ EtherscanProvider.prototype._handleRequests = function(self){
 }
 
 EtherscanProvider.prototype.handleRequest = function(payload, next, end){
+  end = normalizeCallback(end)
   var requestObject = {proto: this.proto, network: this.network, payload: payload, next: next, end: end},
 	  self = this;
 
@@ -246,7 +247,7 @@ function etherscanXHR(useGetMethod, proto, network, module, action, params, end)
     // NOTE: or use id === -1? (id=1 is 'success')
     if ((module === 'proxy') && data.error) {
       // Maybe send back the code too?
-      return end(data.error.message)
+      return end(data.error.message || data.error)
     }
 
     // NOTE: or data.status !== 1?
@@ -275,4 +276,18 @@ function pickNonNull (obj) {
   }
 
   return defined
+}
+
+function normalizeError (err) {
+  if (err instanceof Error) return err
+
+  return new Error("" + err)
+}
+
+function normalizeCallback (cb) {
+  return function (err, result) {
+    if (err) err = normalizeError(err)
+
+    cb(err, result)
+  }
 }
