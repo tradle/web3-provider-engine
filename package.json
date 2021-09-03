@@ -1,6 +1,6 @@
 {
   "name": "@tradle/web3-provider-engine",
-  "version": "13.2.9",
+  "version": "14.0.0",
   "description": "",
   "repository": "https://github.com/MetaMask/provider-engine",
   "main": "index.js",
