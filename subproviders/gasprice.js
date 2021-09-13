@@ -45,7 +45,7 @@ GaspriceProvider.prototype.handleRequest = function(payload, next, end){
     // FIXME: this could be made much faster
     function calcPrice(err, transactions) {
       // flatten array
-      transactions = transactions.reduce(function(a, b) { return a.concat(b) }, [])
+      transactions = transactions.reduce(function(a, b) { return a.concat(b) }, []).filter(Boolean)
 
       // leave only the gasprice
       // FIXME: convert number using a bignum library
@@ -66,6 +66,6 @@ GaspriceProvider.prototype.handleRequest = function(payload, next, end){
       end(null, median)
     }
 
-    map(blockNumbers, getBlock, calcPrice)      
+    map(blockNumbers, getBlock, calcPrice)
   })
 }
