@@ -34,6 +34,7 @@ inherits(EtherscanProvider, Subprovider)
 function EtherscanProvider(opts) {
   opts = opts || {}
   this.network = opts.network || MAINNET
+  this.apiKey = opts.apiKey || ''
   this.proto = (opts.https || false) ? 'https' : 'http'
   this.requests = [];
   this.times = isNaN(opts.times) ? 4 : opts.times;
@@ -208,7 +209,7 @@ function toQueryString(params) {
 
 function etherscanXHR(useGetMethod, proto, network, module, action, params, end) {
   const subdomain = network === MAINNET ? 'api' : `api-${network}`
-  const qs = toQueryString({ module: module, action: action }) + '&' + toQueryString(params)
+  const qs = toQueryString({ module: module, action: action, apikey: this.apiKey }) + '&' + toQueryString(params)
   const uri = `${proto}://${subdomain}.etherscan.io/api?${qs}`
 
   xhr({
