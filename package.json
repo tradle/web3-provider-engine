@@ -1,5 +1,5 @@
 {
-  "name": "web3-provider-engine",
+  "name": "@tradle/web3-provider-engine",
   "version": "16.0.3",
   "description": "A JavaScript library for composing Ethereum provider objects using middleware modules",
   "repository": "https://github.com/MetaMask/web3-provider-engine",
